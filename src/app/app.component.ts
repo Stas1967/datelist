@@ -56,9 +56,9 @@ export class AppComponent {
 
   getListOfDate = () => {
     if (this.dateA && this.dateB) {
-      for (const day = this.dateA; day <= this.dateB; day.setDate(day.getDate() + 1)) {
-        this.datelist.push(day.toLocaleDateString('es'))
-        console.log(day.toLocaleDateString('es'))
+      for (this.day = this.dateA; this.day <= this.dateB; this.day.setDate(this.day.getDate() + 1)) {
+        this.datelist.push(this.day.toLocaleDateString('es'))
+        console.log(this.day.toLocaleDateString('es'))
       }
     }    
   } 
