@@ -12,19 +12,18 @@ export interface Days {
 })
 export class AppComponent {
   title = 'datelist';
-  day: Date;
   dateA: Date | null;
   dateB: Date | null;
   datelist: string[] = [];
 
   constructor() {
-      this.day = new Date();
-      this.dateA = new Date();
-      this.dateB = new Date();
+    const dNow = new Date();
+      this.dateA = new Date(dNow.getFullYear(), dNow.getMonth(), dNow.getDate());
+      this.dateB = new Date(dNow.getFullYear(), dNow.getMonth(), dNow.getDate());
   }
 
   newDateA = (eventA: MatDatepickerInputEvent<Date>) => {
-    this.datelist = [];
+    this.datelist = [];    
     console.log('DateA', eventA.target.value);
     const dA = eventA.target.value
     if (dA != null) {
@@ -43,9 +42,9 @@ export class AppComponent {
 
   getListOfDate = () => {
     if (this.dateA && this.dateB) {
-      for (this.day = this.dateA; this.day <= this.dateB; this.day.setDate(this.day.getDate() + 1)) {
-        this.datelist.push(this.day.toLocaleDateString('es'))
-        console.log(this.day.toLocaleDateString('es'))
+      for (const day = this.dateA; day <= this.dateB; day.setDate(day.getDate() + 1)) {
+        this.datelist.push(day.toLocaleDateString('es'))
+        console.log(day.toLocaleDateString('es'))
       }
     }    
   } 
