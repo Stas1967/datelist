@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
-export interface Dni {
-  dzien: Date;
+export interface Days {
+  oneday: Date;
 }
 
 @Component({
@@ -24,28 +24,27 @@ export class AppComponent {
       this.dateB.setDate(this.dateB.getDate() + 7);
   }
 
-  addEvent1 = (event: MatDatepickerInputEvent<Date>) => {
+  addEvent1 = (eventA: MatDatepickerInputEvent<Date>) => {
     this.datelist = [];
-    console.log('DateA', event.target.value);
-    const da = event.target.value
+    console.log('DateA', eventA.target.value);
+    const da = eventA.target.value
     if (da != null) {
-      this.dateA = event.target.value;
+      this.dateA = eventA.target.value;
     }    
   }
 
-  addEvent2 = (event: MatDatepickerInputEvent<Date>) => {
+  addEvent2 = (eventB: MatDatepickerInputEvent<Date>) => {
     this.datelist = [];
-    console.log('DateB', event.target.value);
-    const db = event.target.value
+    console.log('DateA', this.dateA?.toLocaleDateString(), 'DateB', eventB.target.value?.toLocaleDateString());
+    const db = eventB.target.value
     if (db != null) {
-      this.dateB = event.target.value;
+      this.dateB = eventB.target.value;
     }
   }
 
   getListOfDate = () => {
     if (this.dateA && this.dateB) {
       for (this.day = this.dateA; this.day <= this.dateB; this.day.setDate(this.day.getDate() + 1)) {
-        console.log(this.day);
         this.datelist.push(this.day.toLocaleDateString('es'))
       }
     }    
