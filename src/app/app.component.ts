@@ -19,7 +19,6 @@ export class AppComponent {
   dateA: Date | null;
   dateB: Date | null;
   datelist: string[] = [];
-  displayEvent: string | undefined | null;
   // reserva: Reservas[] = [
   //   {no: 1, from: new Date('07, 15, 2020'), to: new Date('07, 22, 2020'), name: 'Janusz'},
   //   {no: 2, from: new Date('07, 15, 2020'), to: new Date('07, 22, 2020'), name: 'Andrzej'},
@@ -47,7 +46,6 @@ export class AppComponent {
 
   newDateB = (eventB: MatDatepickerInputEvent<Date>) => {
     this.datelist = [];
-    this.displayEvent = 'DateA ' + this.dateA?.toLocaleDateString() + ' ' + 'DateB ' + eventB.target.value?.toLocaleDateString();
     const dB = eventB.target.value
     if (dB != null) {
       this.dateB = eventB.target.value;
@@ -62,4 +60,13 @@ export class AppComponent {
       }
     }    
   } 
+}
+
+export class Adate {
+  get dateA(): Date {
+    return this.dateA;
+  }
+  set dateA(value: Date) {
+    this.dateA = value;
+  }
 }
