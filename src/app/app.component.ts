@@ -21,23 +21,22 @@ export class AppComponent {
       this.day = new Date();
       this.dateA = new Date();
       this.dateB = new Date();
-      this.dateB.setDate(this.dateB.getDate() + 7);
   }
 
-  addEvent1 = (eventA: MatDatepickerInputEvent<Date>) => {
+  newDateA = (eventA: MatDatepickerInputEvent<Date>) => {
     this.datelist = [];
     console.log('DateA', eventA.target.value);
-    const da = eventA.target.value
-    if (da != null) {
+    const dA = eventA.target.value
+    if (dA != null) {
       this.dateA = eventA.target.value;
     }    
   }
 
-  addEvent2 = (eventB: MatDatepickerInputEvent<Date>) => {
+  newDateB = (eventB: MatDatepickerInputEvent<Date>) => {
     this.datelist = [];
     console.log('DateA', this.dateA?.toLocaleDateString(), 'DateB', eventB.target.value?.toLocaleDateString());
-    const db = eventB.target.value
-    if (db != null) {
+    const dB = eventB.target.value
+    if (dB != null) {
       this.dateB = eventB.target.value;
     }
   }
@@ -46,6 +45,7 @@ export class AppComponent {
     if (this.dateA && this.dateB) {
       for (this.day = this.dateA; this.day <= this.dateB; this.day.setDate(this.day.getDate() + 1)) {
         this.datelist.push(this.day.toLocaleDateString('es'))
+        console.log(this.day.toLocaleDateString('es'))
       }
     }    
   } 
