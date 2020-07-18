@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
-export interface Days {
-  oneday: Date;
+export interface Reservas {
+  no: number;
+  from: Date;
+  to: Date;
+  name: string;
 }
 
 @Component({
@@ -12,12 +15,23 @@ export interface Days {
 })
 export class AppComponent {
   title = 'datelist';
+  day: Date | null;
   dateA: Date | null;
   dateB: Date | null;
   datelist: string[] = [];
+  displayEvent: string | undefined | null;
+  // reserva: Reservas[] = [
+  //   {no: 1, from: new Date('07, 15, 2020'), to: new Date('07, 22, 2020'), name: 'Janusz'},
+  //   {no: 2, from: new Date('07, 15, 2020'), to: new Date('07, 22, 2020'), name: 'Andrzej'},
+  //   {no: 3, from: new Date('07, 15, 2020'), to: new Date('07, 22, 2020'), name: 'Krzysztof'},
+  //   {no: 4, from: new Date('07, 15, 2020'), to: new Date('07, 22, 2020'), name: 'Dariusz'},
+  //   {no: 5, from: new Date('07, 15, 2020'), to: new Date('07, 22, 2020'), name: 'Baltazar'},
+  //   {no: 6, from: new Date('07, 15, 2020'), to: new Date('07, 22, 2020'), name: 'Mikolaj'}
+  // ];
 
   constructor() {
     const dNow = new Date();
+      this.day = new Date(dNow.getFullYear(), dNow.getMonth(), dNow.getDate());
       this.dateA = new Date(dNow.getFullYear(), dNow.getMonth(), dNow.getDate());
       this.dateB = new Date(dNow.getFullYear(), dNow.getMonth(), dNow.getDate());
   }
@@ -33,7 +47,7 @@ export class AppComponent {
 
   newDateB = (eventB: MatDatepickerInputEvent<Date>) => {
     this.datelist = [];
-    console.log('DateA', this.dateA?.toLocaleDateString(), 'DateB', eventB.target.value?.toLocaleDateString());
+    this.displayEvent = 'DateA ' + this.dateA?.toLocaleDateString() + ' ' + 'DateB ' + eventB.target.value?.toLocaleDateString();
     const dB = eventB.target.value
     if (dB != null) {
       this.dateB = eventB.target.value;
