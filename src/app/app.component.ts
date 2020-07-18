@@ -41,7 +41,6 @@ export class AppComponent {
       this.dateB = event.target.value;
     }
   }
-    
 
   getListOfDate = () => {
     if (this.dateA && this.dateB) {
@@ -49,9 +48,6 @@ export class AppComponent {
         console.log(this.day);
         this.datelist.push(this.day.toLocaleDateString('es'))
       }
-    }
-    
-    
-  }
- 
+    }    
+  } 
 }
