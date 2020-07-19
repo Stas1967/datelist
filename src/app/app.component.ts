@@ -16,8 +16,8 @@ export interface Reservas {
 export class AppComponent {
   title = 'datelist';
   day: Date | null;
-  dateA: Date | null;
-  dateB: Date | null;
+  dateA: Date;
+  dateB: Date;
   datelist: string[] = [];
   // reserva: Reservas[] = [
   //   {no: 1, from: new Date('07, 15, 2020'), to: new Date('07, 22, 2020'), name: 'Janusz'},
@@ -30,43 +30,40 @@ export class AppComponent {
 
   constructor() {
     const dNow = new Date();
-      this.day = new Date(dNow.getFullYear(), dNow.getMonth(), dNow.getDate());
-      this.dateA = new Date(dNow.getFullYear(), dNow.getMonth(), dNow.getDate());
-      this.dateB = new Date(dNow.getFullYear(), dNow.getMonth(), dNow.getDate());
+    this.day = new Date(dNow.getFullYear(), dNow.getMonth(), dNow.getDate());
+    this.dateA = new Date(dNow.getFullYear(), dNow.getMonth(), dNow.getDate());
+    this.dateB = new Date(dNow.getFullYear(), dNow.getMonth(), dNow.getDate());
   }
 
   newDateA = (eventA: MatDatepickerInputEvent<Date>) => {
-    this.datelist = [];    
     console.log('DateA', eventA.target.value);
     const dA = eventA.target.value
     if (dA != null) {
-      this.dateA = eventA.target.value;
-    }    
+      this.dateA = dA;
+    }
   }
 
   newDateB = (eventB: MatDatepickerInputEvent<Date>) => {
-    this.datelist = [];
     const dB = eventB.target.value
     if (dB != null) {
-      this.dateB = eventB.target.value;
+      this.dateB = dB;
     }
   }
 
   getListOfDate = () => {
-    if (this.dateA && this.dateB) {
-      for (this.day = this.dateA; this.day <= this.dateB; this.day.setDate(this.day.getDate() + 1)) {
-        this.datelist.push(this.day.toLocaleDateString('es'))
-        console.log(this.day.toLocaleDateString('es'))
-      }
-    }    
-  } 
-}
-
-export class Adate {
-  get dateA(): Date {
-    return this.dateA;
+    this.datelist = [];
+    this.gdbd(this.dateA, this.dateB).forEach(dx => {
+      this.datelist.push(dx.toLocaleDateString('es'))
+    })
   }
-  set dateA(value: Date) {
-    this.dateA = value;
+
+  gdbd = (start: Date, end: Date) => {
+    let dates: Date[] = []
+    const theDate = new Date(start)
+    while (theDate <= end) {
+      dates = [...dates, new Date(theDate)]
+      theDate.setDate(theDate.getDate() + 1)
+    }
+    return dates
   }
 }
