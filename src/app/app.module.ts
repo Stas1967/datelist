@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 import { MatNativeDateModule, MatRippleModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -14,16 +15,21 @@ import { FormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { NavitoComponent } from './navito/navito.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavitoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatTableModule,
+    MatSortModule,
     MatNativeDateModule, MatRippleModule,
     MatDatepickerModule,
     MatFormFieldModule,
@@ -31,6 +37,8 @@ import { MatInputModule } from '@angular/material/input';
     FormsModule,
     MatAutocompleteModule,
     MatExpansionModule,
+    MatCardModule,
+    MatButtonModule,
     MatInputModule,
   ],
   providers: [

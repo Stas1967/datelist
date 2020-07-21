@@ -1,25 +1,75 @@
 <div class="container">
-<div>
-    <mat-form-field>
-      <mat-label>Date A</mat-label>
-      <input [ngModel]="dateA" matInput [matDatepicker]="picker1" (dateChange)="newDateA($event)">
-      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-      <mat-datepicker #picker1></mat-datepicker>
-    </mat-form-field>
-  </div>
-<div>
-    <mat-form-field>
-        <mat-label>Date B</mat-label>
-        <input [ngModel]="dateB" matInput [matDatepicker]="picker2" (dateChange)="newDateB($event)">
-        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-        <mat-datepicker #picker2></mat-datepicker>
-      </mat-form-field>
-</div>
-<div>
-    <button (click)="getListOfDate()" >Get Date</button><br>
-</div>
+    <div>
+        <mat-form-field>
+            <mat-label>Date A</mat-label>
+            <input [ngModel]="dateA" matInput [matDatepicker]="picker1" (dateChange)="newDateA($event)">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field>
+            <mat-label>Date B</mat-label>
+            <input [ngModel]="dateB" matInput [matDatepicker]="picker2" (dateChange)="newDateB($event)">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div>
+        <button (click)="getListOfDate()">Get Date</button><br>
+        <button (click)="naviga()">Geo</button><br>
+    </div>
 </div>
 
+
 <div class="content">
-    <p *ngFor="let d of datelist">{{d}}</p>
+    <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="from">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> From </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.from | date}} </mat-cell>
+            <mat-footer-cell *matFooterCellDef>Total</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="to">
+            <mat-header-cell *matHeaderCellDef> To </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.to | date}} </mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="no">
+            <mat-header-cell *matHeaderCellDef> NO </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.no}} </mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="price">
+            <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.price | currency: '€'}} </mat-cell>
+            <mat-footer-cell *matFooterCellDef>{{getTotal() | currency: '€'}}</mat-footer-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></mat-footer-row>
+    </mat-table>
 </div>
+<div class="container">
+    <button (click)="minus($event)" type="button">Minus</button>
+    <mat-form-field>
+        <input [ngModel]="quantity" matInput class="num" min="0" name="int" type="number" required />
+    </mat-form-field>
+    <button (click)="plus($event)" type="button">Plus</button>
+</div>
+<div class="container">
+    <p>{{subtotal | currency}}</p>
+    <p>{{getTotalP() | currency}}</p>
+</div>
+<div class="container">
+    <button (click)="SaveProdPrice()">Submit</button>
+</div>
+<div class="container">
+    Prod Price {{product_price}}<br> Quantity {{quantity}}<br> SubTotal {{getTotalP()}}
+</div>
+
+<router-outlet></router-outlet>

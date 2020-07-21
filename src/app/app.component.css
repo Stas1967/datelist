@@ -3,9 +3,21 @@
     width: 640px;
     display: flex;
     flex: 1;
-    justify-content: space-between;
-    align-items: flex-end;
+    justify-content: space-around;
+    align-items: flex-start;
     flex-direction: row;
+}
+
+mat-card {
+    background-color: tomato;
+    width: 320px;
+    margin-right: 16px;
+}
+
+mat-card button {
+    background-color: rgb(247, 248, 248);
+    width: 100%;
+    margin-bottom: 16px;
 }
 
 .content {
@@ -16,4 +28,20 @@
     justify-content: space-around;
     align-items: flex-start;
     flex-direction: column;
+}
+
+mat-table {
+    width: 100%;
+}
+
+mat-header-row {
+    background-color: rgb(189, 220, 255);
+}
+
+mat-footer-row {
+    background-color: rgb(118, 5, 170);
+}
+
+mat-footer-cell {
+    color: white;
 }
