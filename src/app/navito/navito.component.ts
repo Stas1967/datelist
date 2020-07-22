@@ -19,7 +19,7 @@ export class NavitoComponent implements OnInit {
     this.meta.addTags([
       { name: 'keywords', content: 'Another page meta' },
       { name: 'robots', content: 'index, follow' },
-      { name: 'author', content: 'Digamber Singh' },
+      { name: 'author', content: 'Diservitec' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { name: 'date', content: '2019-10-31', scheme: 'YYYY-MM-DD' },
       { charset: 'UTF-8' }
