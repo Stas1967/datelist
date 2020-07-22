@@ -1,4 +1,6 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, PLATFORM_ID, Inject } from '@angular/core';
+import { Meta } from '@angular/platform-browser';
+import { isPlatformBrowser } from '@angular/common';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -45,17 +47,26 @@ export class AppComponent implements OnInit {
   
 
   dataSource = new MatTableDataSource(this.reserva);
-  displayedColumns: string[] = ['from', 'to', 'no', 'name', 'price'];
+  displayedColumns: string[] = ['from', 'to', 'no', 'name', 'price', 'edit'];
 
-  constructor(private route: Router) {
+  constructor(private route: Router, private meta: Meta) {
     const dNow = new Date();
     this.day = new Date(dNow.getFullYear(), dNow.getMonth(), dNow.getDate());
     this.dateA = new Date(dNow.getFullYear(), dNow.getMonth(), dNow.getDate());
     this.dateB = new Date(dNow.getFullYear(), dNow.getMonth(), dNow.getDate());
+   
   }
 
   ngOnInit(): void {
     this.dataSource.sort = this.sort;
+    this.meta.addTags([
+      { name: 'keywords', content: '' },
+      { name: 'robots', content: 'index, follow' },
+      { name: 'author', content: 'Digamber Singh' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'date', content: '2019-10-31', scheme: 'YYYY-MM-DD' },
+      { charset: 'UTF-8' }
+    ])
   }
 
   naviga = () => {
@@ -135,5 +146,9 @@ export class AppComponent implements OnInit {
       console.log('ProdPrice', this.product_price);
       console.log('ProdQuant', this.quantity);
       console.log('SubTotal', this.getTotalP());
+  }
+
+  deleteItem(element: Event) {
+    console.log(element);
   }
 }
